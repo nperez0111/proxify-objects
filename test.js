@@ -6,9 +6,9 @@ const pojo = { radius: 1, area: Math.PI },
             return obj.radius * obj.radius * Math.PI
         }
     }, {
-        area(target, property, value) {
-            circle.radius = Math.sqrt(value / Math.PI)
-            return circle.area
+        area(obj, property, value) {
+            obj.radius = Math.sqrt(value / Math.PI)
+            return value
         }
     }),
     a = r => r * r * Math.PI
@@ -31,7 +31,7 @@ test('Set Proxy values', t => {
 })
 
 test('Set Proxied Setter', t => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 12; i++) {
         circle.area = i * Math.PI * i
         t.deepEqual(circle.area, a(i))
         t.deepEqual(circle.radius, i)
@@ -39,7 +39,7 @@ test('Set Proxied Setter', t => {
 })
 
 test('Get Target', t => {
-    circle.radius = 9
+    circle.area = a(9)
     t.deepEqual(pojo.radius, 9)
     t.deepEqual(pojo.area, a(9))
 
@@ -115,8 +115,8 @@ test('set triangle prop', t => {
 
 
 const reverse = fn({}, {}, {
-    defaultCase(obj, property, value) {
-        obj[value] = property
+    defaultCase(obj, property, value, originalObj) {
+        originalObj[value] = property
     }
 })
 
@@ -126,7 +126,7 @@ test('default case of setting - tests reverse', t => {
 })
 
 const returnsKey = fn({ alreadyHere: 12 }, {
-    defaultCase(obj, property) {
+    defaultCase(obj, property, orginalObj) {
         return property
     }
 }, {})

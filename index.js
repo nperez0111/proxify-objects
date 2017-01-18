@@ -26,14 +26,14 @@ function makeNewProxy(obj, properties, setters = {}) {
             if (hasProp(settersKeys, property)) {
                 let val = setters[property]
                 if (isFn(val)) {
-                    ret = val(target, property, value)
+                    ret = val(proxyObject, property, value)
                 }
                 if (ret === undefined) {
                     return true;
                 }
             } else if (hasProp(settersKeys, 'defaultCase')) {
 
-                ret = setters.defaultCase(target, property, value)
+                ret = setters.defaultCase(proxyObject, property, value, target)
 
                 if (ret === undefined) {
                     return true
