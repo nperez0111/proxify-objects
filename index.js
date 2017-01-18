@@ -12,7 +12,7 @@ function makeNewProxy(obj, properties, setters = {}) {
                 return properties[property](proxyObject)
             }
             if (!target.hasOwnProperty(property) && hasProp(keys, 'defaultCase')) {
-                return properties.default(proxyObject)
+                return properties.defaultCase(proxyObject, property)
             }
 
             return target[property]
