@@ -47,33 +47,40 @@ So now whenever the radius is updated it updates the area and when the area is u
 ## makeNewProxy(objectToBeProxied, gettersObject, settersObject)
 
 ### objectToBeProxied:
+
  Just a Plain Ol JavaScript Object that may or may not have all the properties you wish to have computed.
  
 ### gettersObject:
+
  Another PoJo with keys equal to the properties you wish to have computed and values of the function you wish to compute with. The function will be called with the function signature: 
  
 `` function( proxyObjectItself) ``
 
- ### returning
+### returning
+
  Anything you return within this function will be used as the computed value without restriction.
  
- #### defaultCase
+#### defaultCase
+
  A special key with the name `defaultCase` can be called whenever a key is not on the original object. This can be used dynamically create properties to be read from. It is called with the function signature:
  
  `` function( proxyObject, keyBeingCalledFor ) ``
  
 ### settersObject:
+
  Another PoJo with keys equal to the properties you want to control the setting of; with values of the functionl you wish to create that setting with. The function will be called with the function signature:
  
  `` function( proxyObjectItself, keyBeingAttemptedToSet, valueBeingAttemptedToSet ) ``
  
- #### Returning
+#### Returning
+ 
  If what is returned is ``Undefined`` or no return is specified:
  	No additional assignment on the object will be made.
  If what is returned is anything but ``Undefined``:
  	Whatever is returned will be assigned to the key specified and its value will be whatever is returned from that function.
 
- #### defaultCase
+#### defaultCase
+ 
  A special key with the name `defaultCase` can be called whenever a key is not on the original object. This can be used dynamically create properties to be read from. It is called with the function signature:
  
  `` function( proxyObjectItself, keyBeingAttemptedToBeSet, valueAttemptedToBeingSet, originalPoJoObjectToAvoidRecursion ) ``
