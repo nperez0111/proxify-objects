@@ -1,9 +1,9 @@
 {
     "name": "proxify-objects",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Sets up traps on objects to make computed properties.",
     "license": "MIT",
-    "repository": "nperez0111/proxify",
+    "repository": "nperez0111/proxify-objects",
     "author": {
         "name": "Nick The Sick",
         "email": "nperez0111@gmail.com",
@@ -22,8 +22,7 @@
         ""
     ],
     "dependencies": {
-        "is-object": "^1.0.1",
-        "merge": "^1.2.0"
+
     },
     "devDependencies": {
         "ava": "^0.15.2"
