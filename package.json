@@ -1,5 +1,5 @@
 {
-    "name": "proxify",
+    "name": "proxify-objects",
     "version": "0.0.1",
     "description": "Sets up traps on objects to make computed properties.",
     "license": "MIT",
