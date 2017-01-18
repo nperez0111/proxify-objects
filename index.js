@@ -1,3 +1,6 @@
+const isFn = require('is-fn'),
+    isArr = a => Array.isArray(a)
+
 function makeNewProxy(obj, properties, setters = {}) {
 
     const keys = Object.keys(properties),
@@ -21,15 +24,14 @@ function makeNewProxy(obj, properties, setters = {}) {
             if (!property) return noop;
             let ret = value
             if (hasProp(settersKeys, property)) {
-
-                ret = setters[property](target, property, value)
-
+                let val = setters[property]
+                if (isFn(val)) {
+                    ret = val(target, property, value)
+                }
                 if (ret === undefined) {
                     return true;
                 }
-            }
-
-            if (hasProp(settersKeys, 'defaultCase')) {
+            } else if (hasProp(settersKeys, 'defaultCase')) {
 
                 ret = setters.defaultCase(target, property, value)
 
