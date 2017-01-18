@@ -112,3 +112,26 @@ test('set triangle prop', t => {
     t.deepEqual(triangle.height, 4)
     t.deepEqual(triangle.base, 4)
 })
+
+
+const reverse = fn({}, {}, {
+    defaultCase(obj, property, value) {
+        obj[value] = property
+    }
+})
+
+test('default case of setting - tests reverse', t => {
+    reverse.value = 'key'
+    t.deepEqual(reverse.key, 'value')
+})
+
+const returnsKey = fn({ alreadyHere: 12 }, {
+    defaultCase(obj, property) {
+        return property
+    }
+}, {})
+
+test('default case of getting - tests returns key that isnt on object already', t => {
+    t.deepEqual(returnsKey.value, 'value')
+    t.deepEqual(returnsKey.alreadyHere, 12)
+})
