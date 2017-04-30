@@ -68,6 +68,10 @@ for ( let i = 0; i < 6; i++ ) {
 \\2
 \\3
 \\5
+
+//OR since it's recursive you can look up any fibonacci number by index via accessing the array at the index.
+fibonacci[20]
+//6765
 ````
 Now you can see that the array is able to hold the values computed but does not compute them until they are read.
 
