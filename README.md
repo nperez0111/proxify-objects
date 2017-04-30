@@ -43,6 +43,34 @@ circle.radius
 It just created a bidirectional relationship between the area and radius of the circle; now the radius has just been updated based on the area of the circle.
 So now whenever the radius is updated it updates the area and when the area is updated it updates the radius.
 
+## Great use case
+Some times you want a value to not be evaluated at time of creation but rather when the value is read. Example:
+```` JS
+const fibonacci = makeNewProxy( [ 0, 1 ], {
+    defaultCase( obj, key, orig ) {
+        if ( Number( key.toString() ) == key ) {
+            if ( key == 0 || key == 1 ) {
+                return key
+            }
+            const fibVal = obj[ key - 1 ] + obj[ key - 2 ]
+            obj[ key ] = fibVal
+            return fibVal
+        }
+    }
+} )
+
+for ( let i = 0; i < 6; i++ ) {
+    console.log( fibonacci[ i ] )
+}
+\\0
+\\1
+\\1
+\\2
+\\3
+\\5
+````
+Now you can see that the array is able to hold the values computed but does not compute them until they are read.
+
 ## API
 ## makeNewProxy(objectToBeProxied, gettersObject, settersObject)
 
