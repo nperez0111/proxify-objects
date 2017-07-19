@@ -1,5 +1,5 @@
 const test = require( 'ava' ),
-    fn = require( './' );
+    fn = require( './build' );
 const pojo = { radius: 1, area: Math.PI },
     circle = fn( pojo, {
         area( obj ) {
